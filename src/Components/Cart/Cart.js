@@ -2,15 +2,15 @@ import React from 'react'
 import { StyleSheet, Text, View , Image } from 'react-native'
 
 const Cart = (props) => {
-    console.log(props)
-    const {item , name} = props;
-    console.log(name)
+     
+    const {items , name} = props;
+     
 
     return (
         <View style={styles.container}>
             <View style={styles.main}>
              
-            <Image style={styles.image} source={{uri:item.url_s}} />
+            <Image style={styles.image} source={{uri:items.url_s}} />
         
             </View>
         </View>

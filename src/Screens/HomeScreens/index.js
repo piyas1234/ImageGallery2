@@ -1,35 +1,30 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext  } from 'react'
 import { StyleSheet, Text, View , Image, ScrollView ,FlatList } from 'react-native'
+import { DataContext } from '../../../App'
 import Cart from '../../Components/Cart/Cart'
+import Input from '../../Components/Input'
+import Pagination from '../../Components/Pagination'
 const HomeScreens = () => {
-
-    const [data, setData] = useState([])
-    
-    useEffect(() => {
-        LoadData()
-    }, [])
-
-    const LoadData = async ()=>{
-        const Data = await axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&per_page=20&page=1&api_key=6f102c62f41998d151e5a1b48713cf13&format=json&nojsoncallback=1&extras=url_s')
-        setData(Data.data.photos.photo)
-         
-    }
-
-    console.log(data)
-
  
+     
+    const  {data, setData} = useContext(DataContext)
+     console.log(data)
+     console.log(setData)
 
     return (
          <View > 
+
+             <Input/>
              <FlatList
               style={styles.imageCart}
               data={data} 
               numColumns={2}
-              renderItem={(item)=><Cart item={item.item} name="jamal" /> }
+              renderItem={(item)=><Cart items={item.item} name="jamal" /> }
               keyExtractor={item=>item.id} 
+               
               />
-              
+            <Pagination/>
          </View>
     )
 }
@@ -38,6 +33,8 @@ export default HomeScreens
 
 const styles = StyleSheet.create({
     
-   
+    imageCart:{
+        height:'85%'
+    }
      
 })
